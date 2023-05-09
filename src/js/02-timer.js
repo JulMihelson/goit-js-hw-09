@@ -29,6 +29,7 @@ function convertMs(term) {
 
   return { days, hours, minutes, seconds };
 }
+startBtn.disabled = true;
 
 // ------------------
 const options = {
@@ -36,6 +37,7 @@ const options = {
   time_24hr: true,
   defaultDate: new Date(),
   minuteIncrement: 1,
+
   onClose(selectedDates, dateStr) {
     startBtn.disabled = true;
     dateStr = selectedDates[0];
@@ -55,10 +57,11 @@ let timerId;
 
 const countdown = () => {
   const term = deadline - new Date();
-  console.log(term);
   if (term <= 0) {
     clearInterval(timerId);
+    return;
   }
+
   startBtn.disabled = true;
   const { days, hours, minutes, seconds } = convertMs(term);
   secondsText.textContent = seconds;
