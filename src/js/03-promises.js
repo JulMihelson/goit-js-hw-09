@@ -25,23 +25,25 @@ form.addEventListener('submit', event => {
   const stepDelay = Number(step.value);
   const amountEntered = Number(amount.value);
   if (amountEntered <= 0) {
-    Notiflix.Notify.failure(`Please enter amount over 0`);
+    Notiflix.Notify.failure(`Please enter number more then 0`);
   } else {
     for (let i = 0; i < amountEntered; i += 1) {
-      createPromise(i, delay)
-        .then(object => {
-          Notiflix.Notify.success(
-            `Fullfiled promise ${i + 1} in ${object.delay}ms`
-          );
-        })
-        .catch(object => {
-          Notiflix.Notify.failure(
-            `Rejected promise ${i + 1} in ${object.delay}ms`
-          );
-        });
-      delay += stepDelay;
+      for (let i = 0; i < amountEntered; i += 1) {
+        createPromise(i, delay)
+          .then(object => {
+            Notiflix.Notify.success(
+              `Fullfiled promise ${i + 1} in ${object.delay}ms`
+            );
+          })
+          .catch(object => {
+            Notiflix.Notify.failure(
+              `Rejected promise ${i + 1} in ${object.delay}ms`
+            );
+          });
+        delay += stepDelay;
 
-      event.currentTarget.reset();
+        event.currentTarget.reset();
+      }
     }
   }
 });
