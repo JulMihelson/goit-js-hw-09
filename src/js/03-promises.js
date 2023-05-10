@@ -28,22 +28,20 @@ form.addEventListener('submit', event => {
     Notiflix.Notify.failure(`Please enter number more then 0`);
   } else {
     for (let i = 0; i < amountEntered; i += 1) {
-      for (let i = 0; i < amountEntered; i += 1) {
-        createPromise(i, delay)
-          .then(object => {
-            Notiflix.Notify.success(
-              `Fullfiled promise ${i + 1} in ${object.delay}ms`
-            );
-          })
-          .catch(object => {
-            Notiflix.Notify.failure(
-              `Rejected promise ${i + 1} in ${object.delay}ms`
-            );
-          });
-        delay += stepDelay;
+      createPromise(i, delay)
+        .then(object => {
+          Notiflix.Notify.success(
+            `Fullfiled promise ${i + 1} in ${object.delay}ms`
+          );
+        })
+        .catch(object => {
+          Notiflix.Notify.failure(
+            `Rejected promise ${i + 1} in ${object.delay}ms`
+          );
+        });
+      delay += stepDelay;
 
-        event.currentTarget.reset();
-      }
+      event.currentTarget.reset();
     }
   }
 });
